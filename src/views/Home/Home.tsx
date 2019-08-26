@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import "./main.scss";
+import "./home.scss";
 import a from '../../cnodejs_light.svg';
 import http from '../../util/fetch';
 interface Props {
     message?: string;
 }
 
-const Main:React.FunctionComponent<Props> = (props) => {
+const Home:React.FunctionComponent<Props> = (props) => {
     let converTime: (last: string, create: string) => string;
     const [data, setData] = useState(null);
     const [navKey,setNavKey] = useState('');
@@ -95,4 +95,4 @@ const Main:React.FunctionComponent<Props> = (props) => {
     );
 };
 
-export default Main;
+export default Home;

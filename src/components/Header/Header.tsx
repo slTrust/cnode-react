@@ -1,6 +1,7 @@
 import React from 'react';
 import "./header.scss";
 import a from '../../cnodejs_light.svg';
+import {Link} from "react-router-dom";
 interface Props {
     message?: string;
 }
@@ -13,8 +14,15 @@ const Header:React.FunctionComponent<Props> = (props) => {
                 </a>
                 {/*<input type="text" className="searchbox"/>*/}
                 <ul className="nav-bar fr clearfix">
-                    {['首页','入门','API','关于','注册','登录'].map(title =>{
-                        return <li className="fl" key={title}>{title}</li>;
+                    {[
+                        {title:'首页',path:'/'},
+                        {title:'关于',path:'/about'}
+                    ].map(item =>{
+                        return (
+                            <li className="fl" key={item.title}>
+                                <Link to={item.path}>{item.title}</Link>
+                            </li>);
+
                     })}
                 </ul>
             </div>
