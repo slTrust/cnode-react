@@ -1,0 +1,29 @@
+.cnode-header{
+  margin-bottom:0;
+  background: #444;
+  width:100%;
+  position: relative;
+  font-size: 14px;
+  z-index: 9;
+  &-inner{
+      margin:0 auto;
+      .logo{
+        padding:3px 20px;
+        line-height: 34px;
+        color:#333;
+        font-weight: 700;
+        display: block;
+        float:left;
+        img {
+          height: 28px;
+          width: 120px;
+        }
+      }
+      .nav-bar{
+        li{
+          padding:10px 15px;
+          color:#ccc;
+        }
+      }
+  }
+}
