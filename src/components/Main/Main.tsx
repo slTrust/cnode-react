@@ -29,16 +29,14 @@ const Main:React.FunctionComponent<Props> = (props) => {
 
     const onClickNav = (navCode:string,e:any) => {
         e.preventDefault();
-        setNavKey(navCode);
         getList(navCode);
-        console.log(e.target)
     };
     const getList = (keyword:string) =>{
         http.get('api/v1/topics',{
             tab:keyword
         }).then((res:any)=>{
-            console.log(res.data[0]);
-            setData( res.data);
+            setData(res.data);
+            setNavKey(keyword);
         });
     }
 
