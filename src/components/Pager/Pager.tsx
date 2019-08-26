@@ -18,7 +18,9 @@ const Pager:React.FunctionComponent<Props> = (props) => {
             listArray.push(<li
                 className={`pagerItem fl ${ pageTexts[i]===props.page ? 'active' : ''}`}
                 key={i}
-                onClick={()=>props.setPageNum(i)}
+                onClick={()=>{
+                    (typeof pageTexts[i] === 'number') && props.setPageNum(pageTexts[i])
+                }}
             >{pageTexts[i]}</li>)
         }
         return listArray;
