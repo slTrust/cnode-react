@@ -7,9 +7,15 @@ interface Props {
 }
 
 const Main:React.FunctionComponent<Props> = (props) => {
-
     let converTime: (last: string, create: string) => string;
     const [data, setData] = useState(null);
+    const [navKey,setNavKey] = useState('');
+    const navs = [
+        {name:'全部',code:''},
+        {name:'精华',code:'good'},
+        {name:'分享',code:'share'},
+        {name:'问答',code:'ask'},
+        {name:'招聘',code:'job'}];
     converTime = (last: string, create: string): string => {
         let total =( new Date(last).getTime() - new Date(create).getTime()) / 86400000;
         let res:string = '';
@@ -20,15 +26,24 @@ const Main:React.FunctionComponent<Props> = (props) => {
         }
         return res;
     };
+
+    const onClickNav = (navCode:string,e:any) => {
+        e.preventDefault();
+        setNavKey(navCode);
+        getList(navCode);
+        console.log(e.target)
+    };
+    const getList = (keyword:string) =>{
+        http.get('api/v1/topics',{
+            tab:keyword
+        }).then((res:any)=>{
+            console.log(res.data[0]);
+            setData( res.data);
+        });
+    }
+
     useEffect(() => {
-       http.get('api/v1/topics',{}).then((res:any)=>{
-           let xxx = res.data;
-           (xxx as Array<any>).map((a)=>{
-               return 1;
-           });
-           console.log(res.data[0])
-           setData( res.data);
-       });
+        getList(navKey);
     }, []);
     // @ts-ignore
     return (
@@ -46,12 +61,13 @@ const Main:React.FunctionComponent<Props> = (props) => {
 
                 <div className="content">
                     <div className="categoryBox clearfix">
-                        <div className="fl"><a href="">全部</a></div>
-                        <div className="fl"><a href="">精华</a></div>
-                        <div className="fl"><a href="">分享</a></div>
-                        <div className="fl"><a href="">问答</a></div>
-                        <div className="fl"><a href="">招聘</a></div>
-                        <div className="fl"><a href="">客户端测试</a></div>
+                        {navs.map((nav)=>{
+                            return (<a key={nav.name}
+                                       className={['fl',nav.code===navKey?'active':' '].join(' ')}
+                                       href="#"
+                                       onClick={(e)=>onClickNav(nav.code,e)}>{nav.name}
+                                    </a>)
+                        })}
                     </div>
                     <ul className="topic_list">
                         {data !== null && (data as unknown as Array<any>).map((item:any ,index:number)=> {
