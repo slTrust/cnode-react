@@ -8,8 +8,18 @@ interface Props {
 
 const Main:React.FunctionComponent<Props> = (props) => {
 
+    let converTime: (last: string, create: string) => string;
     const [data, setData] = useState(null);
-
+    converTime = (last: string, create: string): string => {
+        let total =( new Date(last).getTime() - new Date(create).getTime()) / 86400000;
+        let res:string = '';
+        if(total < 1 ){
+            res = `${parseInt(total*24 + '')}小时前`
+        }else{
+            res = `${parseInt(total + '')}天前`
+        }
+        return res;
+    };
     useEffect(() => {
        http.get('api/v1/topics',{}).then((res:any)=>{
            let xxx = res.data;
@@ -53,11 +63,12 @@ const Main:React.FunctionComponent<Props> = (props) => {
                                             <span className="count_of_replies">{item.reply_count}</span>/<span
                                             className="count_of_visits">{item.visit_count}</span>
                                         </span>
+                                        {item.top?<span className="put_top">置顶</span>:null}&nbsp;
                                         <span className="topic_title">{item.title}</span>
                                     </div>
                                     <div className="info2 fr">
                                         <img src="" alt=""/>
-                                        <span>{item.last_reply_at}</span>
+                                        <span>{converTime(item.last_reply_at,item.create_at)}</span>
                                     </div>
                                 </li>)
                         })}
