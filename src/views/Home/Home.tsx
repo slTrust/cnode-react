@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./home.scss";
 import a from '../../logo.svg';
 import http from '../../util/fetch';
+import Pager from "../../components/Pager/Pager";
 interface Props {
     message?: string;
 }
@@ -10,6 +11,8 @@ const Home:React.FunctionComponent<Props> = (props) => {
     let converTime: (last: string, create: string) => string;
     const [data, setData] = useState(null);
     const [navKey,setNavKey] = useState('');
+    const [page,setPage] = useState(1);
+    const [pageSize] = useState(10);
     const navs = [
         {name:'全部',code:''},
         {name:'精华',code:'good'},
@@ -29,19 +32,27 @@ const Home:React.FunctionComponent<Props> = (props) => {
 
     const onClickNav = (navCode:string,e:any) => {
         e.preventDefault();
-        getList(navCode);
+        setPage(1);
+        setNavKey(navCode);
+        getList();
     };
-    const getList = (keyword:string) =>{
+    const getList = () =>{
         http.get('api/v1/topics',{
-            tab:keyword
+            tab:navKey,
+            page:page,
+            limit:pageSize
         }).then((res:any)=>{
             setData(res.data);
-            setNavKey(keyword);
         });
     }
 
+    const setPageNum = (n:number)=>{
+        setPage(n);
+        getList();
+    }
+
     useEffect(() => {
-        getList(navKey);
+        getList();
     }, []);
     // @ts-ignore
     return (
@@ -87,6 +98,14 @@ const Home:React.FunctionComponent<Props> = (props) => {
                                 </li>)
                         })}
                     </ul>
+
+                    {data ? (<div style={{padding:15}}>
+                            <Pager
+                                    page={page}
+                                    pageSize={pageSize}
+                                    total={200}
+                                    setPageNum={setPageNum}
+                            /></div>) :null}
                 </div>
 
             </div>

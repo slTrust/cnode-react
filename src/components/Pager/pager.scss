@@ -1,0 +1,27 @@
+.pagerBox{
+
+    .pagerItem{
+        cursor:pointer;
+        &.active{
+            color:#80bd01;
+        }
+        &.prev,&.next{
+            border-radius: 3px;
+        }
+        &.prev{
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        &.next{
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        border-right: 1px solid #ccc;
+        line-height: 30px;
+        width: 30px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
