@@ -1,6 +1,6 @@
 import React from 'react';
 import "./header.scss";
-import a from '../../cnodejs_light.svg';
+import logo from '../../logo.svg';
 import {Link} from "react-router-dom";
 interface Props {
     message?: string;
@@ -10,9 +10,8 @@ const Header:React.FunctionComponent<Props> = (props) => {
         <div className="cnode-header">
             <div className="cnode-header-inner container clearfix">
                 <a href="" className="logo">
-                    <img src={a} alt=""/>
+                    <img src={logo} alt=""/>
                 </a>
-                {/*<input type="text" className="searchbox"/>*/}
                 <ul className="nav-bar fr clearfix">
                     {[
                         {title:'首页',path:'/'},

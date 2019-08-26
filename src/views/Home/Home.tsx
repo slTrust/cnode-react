@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./home.scss";
-import a from '../../cnodejs_light.svg';
+import a from '../../logo.svg';
 import http from '../../util/fetch';
 interface Props {
     message?: string;
@@ -45,8 +45,8 @@ const Home:React.FunctionComponent<Props> = (props) => {
     }, []);
     // @ts-ignore
     return (
-        <div className="cnode-main">
-            <div className="cnode-main-inner container">
+        <div className="cnode-home">
+            <div className="cnode-home-inner container">
                 <div className="sidebar">
                     <ul>
                         <li>1</li>
