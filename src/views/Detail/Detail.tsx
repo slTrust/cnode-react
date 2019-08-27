@@ -8,12 +8,12 @@ interface Props {
 }
 
 const Detail:React.FunctionComponent<Props> = (props) => {
-    const [content,setContent] = useState('');
+    const [info,setInfo] = useState(null);
     let id = props.match.params.id;
     const getContent = () =>{
         http.get(`/api/v1/topic/${id}`,{}).then((res:any)=>{
             console.log(res.data)
-            setContent(res.data.content);
+            setInfo(res.data);
         });
     };
 
@@ -24,25 +24,27 @@ const Detail:React.FunctionComponent<Props> = (props) => {
     return (
         <div className="cnode-detail">
             <div className="cnode-detail-inner container">
-                <div className="content">
-                    <div className="header">
-                        <div className="title">
+                {info!==null ?
+                    (<div className="content">
+                        <div className="header">
+                            <div className="title">
                             <span className="titleBox">
                                 <span className="tip">置顶</span>&nbsp;
-                                Node 地下铁第九期「杭州站」线下沙龙邀约 - Let's Go Deep
+                                {(info as any).title}
                             </span>
-                        </div>
-                        <span className="info">
-                            发布于7天前-作者 xxx- 2555次浏览- 来自分享
+                            </div>
+                            <span className="info">
+                            发布于7天前-作者 {(info as any).author.loginname}- {(info as any).visit_count}次浏览- 来自{(info as any).tab}
                         </span>
-                    </div>
-                    <div className="panel">
-                        <ReactMarkdown
-                            source={content}
-                            escapeHtml={false}
-                        />
-                    </div>
-                </div>
+                        </div>
+                        <div className="panel">
+                            <ReactMarkdown
+                                source={(info as any).content}
+                                escapeHtml={false}
+                            />
+                        </div>
+                    </div>)
+                    :null}
             </div>
         </div>
     )
