@@ -90,7 +90,7 @@ const Home:React.FunctionComponent<Props> = (props) => {
                                             className="count_of_visits">{item.visit_count}</span>
                                         </span>
                                         {item.top?<span className="put_top">置顶</span>:null}&nbsp;
-                                        <Link to='/detail'><span className="topic_title">{item.title}</span></Link>
+                                        <Link to={'/detail/'+ item.id}><span className="topic_title">{item.title}</span></Link>
                                     </div>
                                     <div className="info2 fr">
                                         <img src="" alt=""/>
