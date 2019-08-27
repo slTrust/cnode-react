@@ -1,0 +1,18 @@
+.cnode-detail {
+    background:#e1e1e1;
+    &-inner {
+        margin:0 auto;
+        padding:15px 0;
+        .content {
+            margin-right: 305px;
+            background: #fff;
+        }
+        .sidebar {
+            width: 290px;
+            font-size: 14px;
+            float: right;
+            margin-bottom: 20px;
+            border: 1px solid pink;
+        }
+    }
+}

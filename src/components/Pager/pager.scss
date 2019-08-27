@@ -1,5 +1,6 @@
 .pagerBox{
-
+    display: inline-flex;
+    border-left: 1px solid #ccc;
     .pagerItem{
         cursor:pointer;
         &.active{
@@ -16,6 +17,8 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
+        border:1px solid #ccc;
+        border-left: none;
         border-right: 1px solid #ccc;
         line-height: 30px;
         width: 30px;

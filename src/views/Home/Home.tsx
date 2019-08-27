@@ -3,6 +3,7 @@ import "./home.scss";
 import a from '../../logo.svg';
 import http from '../../util/fetch';
 import Pager from "../../components/Pager/Pager";
+import {Link} from "react-router-dom";
 interface Props {
     message?: string;
 }
@@ -89,7 +90,7 @@ const Home:React.FunctionComponent<Props> = (props) => {
                                             className="count_of_visits">{item.visit_count}</span>
                                         </span>
                                         {item.top?<span className="put_top">置顶</span>:null}&nbsp;
-                                        <span className="topic_title">{item.title}</span>
+                                        <Link to='/detail'><span className="topic_title">{item.title}</span></Link>
                                     </div>
                                     <div className="info2 fr">
                                         <img src="" alt=""/>
@@ -99,7 +100,7 @@ const Home:React.FunctionComponent<Props> = (props) => {
                         })}
                     </ul>
 
-                    {data ? (<div style={{padding:15}}>
+                    {data ? (<div style={{padding:10,background:'#fff'}}>
                             <Pager
                                     page={page}
                                     pageSize={pageSize}
